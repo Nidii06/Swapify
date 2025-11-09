@@ -1,0 +1,118 @@
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-header h1 {
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+
+.page-header p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+
+.search-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.search-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+}
+
+.filters select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: white;
+}
+
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+
+.skill-card {
+  background: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.skill-header h3 {
+  color: #2c3e50;
+  margin: 0;
+  flex: 1;
+}
+
+.category {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.category.technology { background: #e8f4fd; color: #3498db; }
+.category.languages { background: #f0f8ff; color: #9b59b6; }
+.category.music { background: #f9f2ff; color: #8e44ad; }
+.category.arts { background: #fff8e1; color: #f39c12; }
+.category.cooking { background: #fff0f0; color: #e74c3c; }
+.category.sports { background: #f0fff0; color: #27ae60; }
+
+.skill-description {
+  color: #7f8c8d;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.skill-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #95a5a6;
+}
+
+.skill-actions {
+  text-align: center;
+}

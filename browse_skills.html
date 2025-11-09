@@ -3,14 +3,162 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browse Skills</title>
+  <title>Browse Skills - Skill Swap</title>
 
     <link rel = "stylesheet" href="style.css">
   <link rel="stylesheet" href="frontend/css/components/navigation.css">
   <link rel="stylesheet" href="frontend/css/components/buttons.css">
   <link rel="stylesheet" href="frontend/css/components/forms.css">
+  <link rel="stylesheet" href="frontend/css/components/cards.css">
 </head>
 <body>
-  
+  <header>
+    <nav>
+      <div class="logo">
+        <h1><a href="index.html">Skill Swap</a></h1>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="browse_skills.html">Browse Skills</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="login.html">Login</li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>Browse Available Skills</h1>
+      <p>Find people to learn from and share your knowledge</p>
+    </div>
+
+
+    <div class="search-section">
+      <div class="search-bar">
+        <input type="text" placeholer="Search skills...">
+        <button class="btn">Search</button>
+      </div>
+
+      <div class="filters">
+        <select>
+          <option value="">All Categories</option>
+          <option value="technology">Technology</option>
+          <option value="languages">Languages</option>
+          <option value="music">Music</option>
+          <option value="arts">Arts & Crafts</option>
+          <option value="sports">Sports</option>
+          <option value="academic">Academic</option>
+        </select>
+
+        <select>
+          <option value="">All Locations</option>
+          <option value="prishtine">Prishtine</option>
+          <option value="prizren">Prizren</option>
+          <option value="peje">Peje</option>
+          <option value="ferizaj">Ferizaj</option>
+        </select>
+      </div>
+
+      <div class="skills-grid">
+
+        <div class="skill-card">
+          <div class="skill-header">
+            <h3>Web Development</h3>
+
+            <span class="category techonology">Technology</span>
+          </div>
+          <p class="skill-description">Learn HTML, CSS, JavaScript and build modern website.</p>
+          <div class="skill-meta"></div>
+          <span class="user">Altin Berisha</span>
+          <span class="location">Prishtine</span>
+        </div>
+        <div class="skill-actions">
+          <button class="btn btn-primary">View Details</button>
+        </div>
+      </div>
+
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <h3>English Language</h3>
+          <span class="category languages">Languages</span>
+        </div>
+        <p class="skill-description">Conversational English practice and grammar lessons.</p>
+        <div class="skill-meta">
+          <span class="user">Sarah Gashi</span>
+          <span class="location">Prizren</span>
+        </div>
+        <div class="skill-actions">
+          <button class="btn btn-primary">View Details</button>
+        </div>
+      </div>
+
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <h3>Guitar Lessons</h3>
+          <span class="category music">Music</span>
+        </div>
+        <p class="skill-description">Beginner to intermediate guitar lessons for all ages.</p>
+        <div class="skill-meta">
+          <span class="user">Erblin Gashi</span>
+          <span class="location">Peje</span>
+        </div>
+        <div class="skill-actions">
+          <button class="btn btn-primary">View Details</button>
+        </div>
+      </div>
+
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <h3>Photography</h3>
+          <span class="category arts">Arts</span>
+        </div>
+        <p class="skill-description">Learn composition, lighting, and photo editing techniques.</p>
+        <div class="skill-meta">
+          <span class="user">Elma Gjakova</span>
+          <span class="location">Peje</span>
+        </div>
+        <div class="skill-actions">
+          <button class="btn btn-primary">View Details</button>
+        </div>
+      </div>
+
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <h3>Cooking - Italian</h3>
+          <span class="category cooking">Cooking</span>
+        </div>
+        <p class="skill-description">Learn authentic Italian pasta and sauce recipes.</p>
+        <div class="skill-meta">
+          <span class="user">Ben Krasniqi</span>
+          <span class="location">Ferizaj</span>
+        </div>
+        <div class="skill-actions">
+          <button class="btn btn-primary">View Details</button>
+        </div>
+      </div>
+
+
+      <div class="skill-card">
+        <div class="skill-header">
+          <h3>Yoga & Meditation</h3>
+          <span class="category sports">Sports</span>
+        </div>
+        <p class="skill-description">Beginner yoga sessions and meditation techniques.</p>
+        <div class="skill-meta">
+          <span class="user">Lisa Miftari</span>
+          <span class="location">Prishtine</span>
+        </div>
+        <div class="skill-actions">
+          <button class="btn btn-primary">View Details</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
 </body>
 </html>
