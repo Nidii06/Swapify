@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Skill Swap</title>
+  <link rel = "stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class = "logo">
+        <h1><a href = "index.html">Skill Swap</a></h1>
+
+      </div>
+
+      <ul class = " nav-links">
+        <li><a href = "index.html">Home</a></li>
+        <li><a href="browser_skills.html">Browse Skills</a></li>
+        <li><a href = "register.html">Register</a></li>
+        <li><a href = "login.html">Login</li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class = "container">
+    <div class = "form-container">
+      <h2>Create Your Account</h2>
+
+      <form>
+        <div class = "form-group">
+          <label for="name">Full Name</label>
+          <input type = "text" id = "name" name = "name" required>
+
+        </div>
+
+        <div class = form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name=" email" reuired>
+
+      </div>
+
+      <div class = "form-group">
+        <label for = "password">Password</label>
+        <input type =  "password" id="password" name = "password" reuqired>
+      </div>
+
+      <div class = "form-group">
+        <label for = "bio">Bio</label>
+        <textarea id  = "bio" name = "bio" placeholder="Tell us about yourself..."></textarea>
+      </div>
+
+      <div class = "form-group">
+        <label for="location">Location</label>
+        <input type = "text" id = "location" name = "location" placeholder="City, Country">
+       </div>
+
+       <button type = "submit" class="btn" style="width: 100%;">Register</button>
+
+      </form>
+
+      <p style = "text-align: center; margin-top: 1rem;">
+        Already have an account? <a href = "login.html">Login here</a>
+      </p>
+    </div>
+  </main>
+</body>
+</html>
