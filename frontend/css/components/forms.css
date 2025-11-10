@@ -22,6 +22,12 @@
   border-radius: 5px;
   font-size: 1rem;
   font-family: inherit;
+  background: white;
+  appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23333' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+   background-size: 0.65rem; 
   transition: border-color 0.3s;
 }
 
@@ -30,6 +36,7 @@
 .form-group textarea:focus{
   outline: none;
   border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
 
 .form-group textarea{
@@ -42,6 +49,8 @@
   gap: 1rem;
   justify-content: flex-end;
   margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ecf0f1;
 }
 
 .form-container h2{
@@ -57,4 +66,8 @@
 
 .form-container a:hover{
   text-decoration: underline;
+}
+
+.form-actions .btn{
+  min-width: 120px;
 }
