@@ -8,15 +8,25 @@
   display: inline-block;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+    font-size: 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:active {
+    transform: translateY(0);
 }
 
 .btn:hover{
   background: #2980b9;
+   transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
 }
 
 .btn-primary{
-  background: #3498db;
+      background: linear-gradient(135deg, #3498db, #2980b9);
 }
 
 .btn-danger{
@@ -27,9 +37,28 @@
   background: #c0392b;
 }
 .btn-success{
-  background: #27ae60;
+  background: linear-gradient(135deg, #27ae60, #219a52);
 }
 
 .btn-success:hover{
-  background: #219a52;
+     background: linear-gradient(135deg, #219a52, #1e8449);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+}
+
+.btn-sm {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+.btn-lg {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+}
+
+
+.btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }

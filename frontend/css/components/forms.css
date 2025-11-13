@@ -5,6 +5,7 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+   border: 1px solid #e9ecef;
 }
 .form-group label{
   display: block;
@@ -41,7 +42,7 @@
 
 .form-group textarea{
   resize: vertical;
-  min-height: 100px;
+  min-height: 120px;
 }
 
 .form-actions{

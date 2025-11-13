@@ -58,23 +58,29 @@ body {
         padding: 0 1rem;
     }
 
-    nav{
-        flex-direction: column;
-        padding: 1rem;
-    }
+   .nav-links {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
 
-    .nav-links{
-        flex-direction: column;
-        gap: 1rem;
-        margin-top: 1rem;
-        width: 100%;
-        text-align: center;
+.nav-links li {
+  display: inline-block;
+}
 
-    }
-
-    .nav-links li {
-        width: 100%;
-    }
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  display: inline-block;
+}
 
     .profile-header {
         flex-direction: column;
