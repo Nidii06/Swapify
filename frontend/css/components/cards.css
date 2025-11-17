@@ -202,7 +202,7 @@
 .section-header {
   margin: 3rem 0 1.5rem 0;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #ecf0f1;
+  border-bottom: none;
 }
 
 .section-header h2 {
@@ -428,6 +428,7 @@
 .section-header {
   text-align: center;
   margin-bottom: 3rem;
+  border-bottom: none;
 }
 
 .section-header h2 {
@@ -606,6 +607,7 @@
   
   .slide-content h1 {
     font-size: 1.8rem;
+    
   }
   
   .skills-preview {

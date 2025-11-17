@@ -141,6 +141,26 @@ function validateLoginForm(){
     return isValid;
 }
 
+function handleRegister(event){
+  if(event){
+  event.preventDefault();
+  }
+  console.log('handleRegister function called');
+
+  if(validateRegisterForm()){
+    console.log('Validation passed');
+    alert('Registration successful! You can now log in.');
+   
+    setTimeout(function() {
+      window.location.href = 'login.html';
+    }, 1000);
+    return true;
+  }else{
+    console.log('Validation failed');
+    return false;
+  }
+}
+
 function showError(elementId, message) {
     const errorElement = document.getElementById(elementId);
     if (errorElement) {
@@ -158,3 +178,4 @@ function clearErrors() {
         element.textContent = '';
     });
 }
+
