@@ -179,3 +179,95 @@ function clearErrors() {
     });
 }
 
+function handleAddSkill(event){
+  event.preventDefault();
+
+  const skillName = document.getElementById('skill-name').value.trim();
+  const category = document.getElementById('category').value;
+  const description = document.getElementById('description').value.trim();
+
+  if(!skillName || !category || !description){
+    alert('Please fill in all required fields');
+    return false;
+
+}
+
+alert('Skill added successfully!');
+
+setTimeout(function(){
+  window.location.href = 'profile.html';
+}, 1000);
+return true;
+}
+
+
+function removeSkill(skillId){
+  if(confirm('Are you sure you want to remove this skill?')) {
+    const button = event.target;
+    button.classList.add('btn-loading');
+    button.disabled = true;
+
+
+    setTimeout(function(){
+      alert('Skill removed successfully!');
+      window.location.reload();
+    },1000);
+  }
+}
+function editSkill(skillId){
+  window.location.href = 'edit_skill.html?skill=' + skillId;
+
+}
+
+function handleAddSkill(event) {
+  event.preventDefault();
+
+  const skillName = document.getElementById('skill-name').value.trim();
+  const category  = document.getElementById('category').value;
+  const description = document.getElementById('description').value.trim();
+
+    if (!skillName || !category || !description) {
+        alert('Please fill in all required fields');
+        return false;
+    }
+   alert('Skill added successfully!');
+    
+    
+    setTimeout(function() {
+        window.location.href = 'profile.html';
+    }, 1000);
+    
+    return true;
+}
+
+function handleEditSkill(event){
+  event.preventDefault();
+
+  const skillName = document.getElementById('skill-name').value.trim();
+  const category = document.getElementById('category').value;
+  const description = document.getElementById('description').value.trim();
+
+  if(!skillName || !category || !description){
+    alert('Please fill in all required fields');
+    return false;
+  }
+  alert('Skill updated successfully!');
+  setTimeout(function(){
+    window.location.href = 'profile.html';
+  }, 1000);
+  return true;
+}
+
+function handleDeleteSkill(){
+  if(confirm('Are you sure you want to delete this skill?')) {
+    const button = event.target;
+    const originalText = button.textContent;
+    button.textContent = 'Deleting...';
+    button.disabled = true;
+
+    setTimeout(function(){
+      alert('Skill deleted successfully!');
+      window.location.href = 'profile.html';
+    }, 1000);
+  }
+}

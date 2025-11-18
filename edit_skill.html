@@ -37,7 +37,7 @@
     </div>
 
     <div class="form-container">
-<form>  
+<form onsubmit="handleEditSkill(event)">  
   <div class="form-group">
     <label for="skill-name">Skill Name *</label>
     <input type="text" id="skill-name" name="skill-name" value="Web Development" required>
@@ -106,14 +106,22 @@
           </select>
         </div>
 
-        <div class="form-actions">
-          <button type="button" class="btn btn-danger" onclick="window.location.href='profile.html'">Cancel</button>
-          <button type="button" class="btn btn-danger" onclick="confirm('Are you sure you want to delete this skill?') && window.location.href='profile.html'">Delete Skill</button>
-          <button type="submit" class="btn btn-success">Update Skill</button>
-        </div>
+       <div class="form-actions">
+  <button type="button" class="btn btn-danger" onclick="window.location.href='profile.html'">Cancel</button>
+  <button type="button" class="btn btn-danger" onclick="handleDeleteSkill()">Delete Skill</button>
+  <button type="submit" class="btn btn-success">Update Skill</button>
+</div>
     </form>
     </div>
 
   </main>
+
+  <script>
+    function handleEditSkill(event){
+      event.preventDefault();
+      alert('Skill updated successfully!');
+      window.location.href = 'profile.html';
+    }
+  </script>
 </body>
 </html>

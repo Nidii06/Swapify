@@ -37,7 +37,7 @@
     </div>
 
     <div class="form-container">
-      <form>
+      <form onsubmit="handleAddSkills(event)">
         <div class="form-group">
           <label for="skill-name"> Skill Name *</label>
           <input type="text" id="skill-name" name="skill-name" placeholder="Web Development, Guitar Playing, Spanish Language .." required>
@@ -107,6 +107,13 @@
       </form>
     </div>
   </main>
-  
+  <script>
+    function handleAddSkill(event){
+      event.preventDefault();
+      alert('Skill added successfully!');
+      window.location.href = 'profile.html';
+    
+    }
+  </script>
 </body>
 </html>
