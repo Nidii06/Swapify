@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Swapify - Home</title>
-
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="frontend/css/components/navigation.css">
-<link rel="stylesheet" href="frontend/css/components/buttons.css">
-<link rel="stylesheet" href="frontend/css/components/forms.css">
-<link rel="stylesheet" href="frontend/css/components/cards.css">
- </head>
+  <link rel="stylesheet" href="frontend/css/components/buttons.css">
+  <link rel="stylesheet" href="frontend/css/components/forms.css">
+  <link rel="stylesheet" href="frontend/css/components/cards.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+</head>
 <body>
-   <header>
+  <header>
     <nav>
       <div class="logo">
         <h1><a href="index.html">Swapify</a></h1>
@@ -20,7 +20,7 @@
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
-        
+        <li><a href="browse_skills.html">Browse Skills</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="login.html">Login</a></li>
       </ul>
@@ -28,7 +28,6 @@
   </header>
 
   <main class="container">
-    
     <section class="hero-slider">
       <div class="slider-container">
         <div class="slide active">
@@ -45,7 +44,6 @@
             <a href="register.html" class="btn btn-success btn-lg">Start Teaching</a>
           </div>
         </div>
-
         <div class="slide">
           <div class="slide-content">
             <h1>Connect & Grow</h1>
@@ -65,28 +63,37 @@
       </div>
     </section>
 
-     <section class="features-section">
+    <section class="features-section">
       <div class="section-header">
         <h2>Why Choose Swapify?</h2>
         <p>Join thousands of learners and teachers worldwide</p>
       </div>
       <div class="features-grid">
         <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-handshake" style="font-size: 3rem; color: #3498db;"></i>
+          </div>
           <h3>Skill Matching</h3>
           <p>Find perfect skill exchange partners based on your interests and location</p>
         </div>
         <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-globe-americas" style="font-size: 3rem; color: #3498db;"></i>
+          </div>
           <h3>Global Community</h3>
           <p>Connect with people from different backgrounds and cultures</p>
         </div>
         <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-mobile-alt" style="font-size: 3rem; color: #3498db;"></i>
+          </div>
           <h3>Easy to Use</h3>
           <p>Simple and intuitive platform designed for seamless skill sharing</p>
         </div>
       </div>
     </section>
 
-     <section class="popular-skills">
+    <section class="popular-skills">
       <div class="section-header">
         <h2>Popular Skills Right Now</h2>
         <p>See what people are learning and teaching</p>
@@ -102,8 +109,7 @@
           <h4>English Practice</h4>
           <p>Conversational Skills</p>
         </div>
-
-         <div class="skill-preview-card">
+        <div class="skill-preview-card">
           <span class="skill-category music">Music</span>
           <h4>Guitar Lessons</h4>
           <p>Beginner to Advanced</p>
@@ -116,7 +122,7 @@
       </div>
     </section>
 
-     <section class="cta-section">
+    <section class="cta-section">
       <div class="cta-content">
         <h2>Ready to Start Your Skill Journey?</h2>
         <p>Join Swapify today and unlock a world of learning opportunities</p>
@@ -126,11 +132,10 @@
         </div>
       </div>
     </section>
-
   </main>
 
   <script>
-      document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
       const slides = document.querySelectorAll('.slide');
       const dots = document.querySelectorAll('.dot');
       const prevBtn = document.querySelector('.slider-prev');
@@ -140,8 +145,8 @@
       function showSlide(n) {
         slides.forEach(slide => slide.classList.remove('active'));
         dots.forEach(dot => dot.classList.remove('active'));
-
-         currentSlide = (n + slides.length) % slides.length;
+        
+        currentSlide = (n + slides.length) % slides.length;
         
         slides[currentSlide].classList.add('active');
         dots[currentSlide].classList.add('active');
@@ -158,7 +163,6 @@
       nextBtn.addEventListener('click', nextSlide);
       prevBtn.addEventListener('click', prevSlide);
 
-
       setInterval(nextSlide, 5000);
 
       dots.forEach((dot, index) => {
@@ -166,6 +170,5 @@
       });
     });
   </script>
-  
 </body>
 </html>
