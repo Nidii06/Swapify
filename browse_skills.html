@@ -1,4 +1,4 @@
-<!DOC<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -69,8 +69,9 @@
           <span class="user">Altin Berisha</span>
           <span class="location">Prishtine</span>
           <div class="skill-actions">
-            <button class="btn btn-primary" onclick="location.href='skill_details.html'">View Details</button>
+            <button class="btn btn-primary view-details-btn">View Details</button>
           </div>
+          <ul class="details-list" style="display:none;"></ul>
         </div>
 
         <div class="skill-card">
@@ -82,8 +83,9 @@
           <span class="user">Sarah Gashi</span>
           <span class="location">Prizren</span>
           <div class="skill-actions">
-            <button class="btn btn-primary" onclick="location.href='skill_details.html'">View Details</button>
+            <button class="btn btn-primary view-details-btn">View Details</button>
           </div>
+          <ul class="details-list" style="display:none;"></ul>
         </div>
 
         <div class="skill-card">
@@ -95,8 +97,9 @@
           <span class="user">Erblin Gashi</span>
           <span class="location">Peje</span>
           <div class="skill-actions">
-            <button class="btn btn-primary" onclick="location.href='skill_details.html'">View Details</button>
+            <button class="btn btn-primary view-details-btn">View Details</button>
           </div>
+          <ul class="details-list" style="display:none;"></ul>
         </div>
 
         <div class="skill-card">
@@ -108,8 +111,9 @@
           <span class="user">Elma Gjakova</span>
           <span class="location">Peje</span>
           <div class="skill-actions">
-            <button class="btn btn-primary" onclick="location.href='skill_details.html'">View Details</button>
+            <button class="btn btn-primary view-details-btn">View Details</button>
           </div>
+          <ul class="details-list" style="display:none;"></ul>
         </div>
 
         <div class="skill-card">
@@ -121,8 +125,9 @@
           <span class="user">Ben Krasniqi</span>
           <span class="location">Ferizaj</span>
           <div class="skill-actions">
-            <button class="btn btn-primary" onclick="location.href='skill_details.html'">View Details</button>
+            <button class="btn btn-primary view-details-btn">View Details</button>
           </div>
+          <ul class="details-list" style="display:none;"></ul>
         </div>
 
         <div class="skill-card">
@@ -134,13 +139,46 @@
           <span class="user">Lisa Miftari</span>
           <span class="location">Prishtine</span>
           <div class="skill-actions">
-            <button class="btn btn-primary" onclick="location.href='skill_details.html'">View Details</button>
+            <button class="btn btn-primary view-details-btn">View Details</button>
           </div>
+          <ul class="details-list" style="display:none;"></ul>
         </div>
 
       </div>
     </div>
   </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const buttons = document.querySelectorAll('.view-details-btn');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const card = button.closest('.skill-card');
+      const user = card.querySelector('.user').textContent;
+      const location = card.querySelector('.location').textContent;
+      const skill = card.querySelector('.skill-header h3').textContent;
+      const description = card.querySelector('.skill-description').textContent;
+
+      const detailsList = card.querySelector('.details-list');
+
+      if(detailsList.style.display === 'none') {
+        detailsList.style.display = 'block';
+        detailsList.innerHTML = `
+          <li><strong>Name:</strong> ${user}</li>
+          <li><strong>Location:</strong> ${location}</li>
+          <li><strong>Skill:</strong> ${skill}</li>
+          <li><strong>Description:</strong> ${description}</li>
+        `;
+        button.textContent = 'Hide Details';
+      } else {
+        detailsList.style.display = 'none';
+        button.textContent = 'View Details';
+      }
+    });
+  });
+});
+</script>
 
 </body>
 </html>
