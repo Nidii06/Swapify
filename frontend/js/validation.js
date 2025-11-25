@@ -1,26 +1,15 @@
 document.addEventListener('DOMContentLoaded', function(){
     const contactForm = document.getElementById('contactForm');
-
     if(contactForm){
       contactForm.addEventListener('submit', function(e){
         e.preventDefault();
-        
         if(validateContactForm()){
           alert('Thank you for your message! We will get back to you soon.');
           contactForm.reset();
         } 
        }); 
     }
-
-    const loginForm = document.querySelector('form[action*="login"]');
-    if(loginForm && window.location.pathname.includes('login.html')){
-      loginForm.addEventListener('submit', function(e){
-        if(!validateLoginForm()){
-          e.preventDefault();
-        }
-      });
-    }
-
+    
     const registerForm = document.querySelector('form[action*="register"]');
     if (registerForm && window.location.pathname.includes('register.html')){
       registerForm.addEventListener('submit', function(e){
@@ -29,13 +18,24 @@ document.addEventListener('DOMContentLoaded', function(){
         }
       });
     }
+    checkLoginStatus();
 }); 
+
+function handleLogin(event){
+    event.preventDefault();
+    if(validateLoginForm()){
+        sessionStorage.setItem('isLoggedIn', 'true');
+        sessionStorage.setItem('userEmail', document.getElementById('email').value.trim());
+        window.location.href = 'profile.html';
+        return true;
+    } else {
+        return false;
+    }
+}
 
 function validateContactForm(){
   let isValid = true;
-
   clearErrors();
-
   const name = document.getElementById('name').value.trim();
   if(name === ''){
     showError('nameError', 'Name is required');
@@ -44,7 +44,6 @@ function validateContactForm(){
     showError('nameError', 'Name must be at least 2 characters long');
     isValid = false;
   }
-
   const email = document.getElementById('email').value.trim();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if(email === ''){
@@ -54,7 +53,6 @@ function validateContactForm(){
     showError('emailError', 'Please enter a valid email address');
     isValid = false;
   }
-
   const subject = document.getElementById('subject').value.trim();
   if (subject === '') {
       showError('subjectError', 'Subject is required');
@@ -63,7 +61,6 @@ function validateContactForm(){
       showError('subjectError', 'Subject must be at least 5 characters long');
       isValid = false;
   }
-
   const message = document.getElementById('message').value.trim();
   if (message === '') {
       showError('messageError', 'Message is required');
@@ -78,65 +75,54 @@ function validateContactForm(){
 function validateLoginForm(){
   let isValid = true;
   clearErrors();
-
-  const email = document.querySelector('input[type="email"]').value.trim();
-  const password = document.querySelector('input[type="password"]').value;
-
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   if (email === '') {
-      alert('Email is required');
+      showError('emailError', 'Email is required');
       isValid = false;
   } else if (!emailRegex.test(email)) {
-      alert('Please enter a valid email address');
+      showError('emailError', 'Please enter a valid email address');
       isValid = false;
   }
-
   if (password === '') {
-      alert('Password is required');
+      showError('passwordError', 'Password is required');
       isValid = false;
   } else if (password.length < 6) {
-      alert('Password must be at least 6 characters long');
+      showError('passwordError', 'Password must be at least 6 characters long');
       isValid = false;
   }
-
   return isValid;
 }
 
 function validateRegisterForm() {
   let isValid = true;
   clearErrors();
-
-  const name = document.querySelector('input[type="text"]').value.trim();
-  const email = document.querySelector('input[type="email"]').value.trim();
-  const password = document.querySelector('input[type="password"]').value;
-
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  
   if (name === '') {
-      alert('Full name is required');
+      showError('nameError', 'Full name is required');
       isValid = false;
   } else if (name.length < 2) {
-      alert('Full name must be at least 2 characters long');
+      showError('nameError', 'Full name must be at least 2 characters long');
       isValid = false;
   }
-
   if (email === '') {
-      alert('Email is required');
+      showError('emailError', 'Email is required');
       isValid = false;
   } else if (!emailRegex.test(email)) {
-      alert('Please enter a valid email address');
+      showError('emailError', 'Please enter a valid email address');
       isValid = false;
   }
-
   if (password === '') {
-      alert('Password is required');
+      showError('passwordError', 'Password is required');
       isValid = false;
   } else if (password.length < 6) {
-      alert('Password must be at least 6 characters long');
+      showError('passwordError', 'Password must be at least 6 characters long');
       isValid = false;
   }
-
   return isValid;
 }
 
@@ -144,18 +130,12 @@ function handleRegister(event){
   if(event){
     event.preventDefault();
   }
-  console.log('handleRegister function called');
-
   if(validateRegisterForm()){
-    console.log('Validation passed');
-    alert('Registration successful! You can now log in.');
-  
-    setTimeout(function() {
-      window.location.href = 'login.html';
-    }, 1000);
+    const email = document.getElementById('email').value.trim();
+    sessionStorage.setItem('registeredEmail', email);
+    window.location.href = 'login.html';
     return true;
   }else{
-    console.log('Validation failed');
     return false;
   }
 }
@@ -183,7 +163,6 @@ function removeSkill(skillId){
     const button = event.target;
     button.classList.add('btn-loading');
     button.disabled = true;
-
     setTimeout(function(){
       alert('Skill removed successfully!');
       window.location.reload();
@@ -197,31 +176,25 @@ function editSkill(skillId){
 
 function handleAddSkill(event) {
   event.preventDefault();
-
   const skillName = document.getElementById('skill-name').value.trim();
   const category  = document.getElementById('category').value;
   const description = document.getElementById('description').value.trim();
-
   if (!skillName || !category || !description) {
       alert('Please fill in all required fields');
       return false;
   }
   alert('Skill added successfully!');
-  
   setTimeout(function() {
       window.location.href = 'profile.html';
   }, 1000);
-  
   return true;
 }
 
 function handleEditSkill(event){
   event.preventDefault();
-
   const skillName = document.getElementById('skill-name').value.trim();
   const category = document.getElementById('category').value;
   const description = document.getElementById('description').value.trim();
-
   if(!skillName || !category || !description){
     alert('Please fill in all required fields');
     return false;
@@ -239,10 +212,26 @@ function handleDeleteSkill(){
     const originalText = button.textContent;
     button.textContent = 'Deleting...';
     button.disabled = true;
-
     setTimeout(function(){
       alert('Skill deleted successfully!');
       window.location.href = 'profile.html';
     }, 1000);
   }
+}
+
+function checkLoginStatus() {
+    if (window.location.pathname.includes('profile.html')) {
+        const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        if (!isLoggedIn) {
+            alert('Please log in to access your profile.');
+            window.location.href = 'login.html';
+        }
+    }
+}
+
+function handleLogout(){
+  sessionStorage.removeItem('isLoggedIn');
+  sessionStorage.removeItem('userEmail');
+  alert('You have been logged out.');
+  window.location.href = 'index.html';
 }
