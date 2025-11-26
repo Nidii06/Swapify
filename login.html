@@ -3,52 +3,329 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Swapify</title>
-  <link rel = "stylesheet" href = "style.css">
+  <title>Login • Swapify</title>
+
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="frontend/css/components/navigation.css">
   <link rel="stylesheet" href="frontend/css/components/buttons.css">
   <link rel="stylesheet" href="frontend/css/components/forms.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      background: #f8fafc;
+    }
+
+    .navbar {
+      padding: 1.2rem 4rem;
+      background: #ffffff;
+      border-bottom: 1px solid #e4e4e4;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #1e293b;
+      font-weight: 500;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .active {
+      color: #3b82f6;
+      font-weight: 600;
+    }
+
+    .auth-section {
+      display: flex;
+      height: calc(100vh - 80px);
+    }
+
+    .auth-left {
+      flex: 1;
+      background: linear-gradient(135deg, #3b82f6, #6366f1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .auth-left h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .auth-left p {
+      font-size: 1.2rem;
+      max-width: 380px;
+    }
+
+    .auth-container {
+      flex: 1;
+      padding: 4rem 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .auth-box {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      padding: 3rem 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .auth-box h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #1e293b;
+    }
+
+    .auth-box p {
+      color: #6b7280;
+      margin-bottom: 2rem;
+    }
+
+    .form-field {
+      margin-bottom: 1.4rem;
+    }
+
+    .form-field label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #374151;
+    }
+
+    .field-wrapper {
+      display: flex;
+      align-items: center;
+      background: #f1f5f9;
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+    }
+
+    .field-wrapper input {
+      border: none;
+      background: none;
+      flex: 1;
+      outline: none;
+    }
+
+    .field-wrapper i {
+      margin-right: 0.8rem;
+      color: #64748b;
+    }
+
+    .view-pass {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #64748b;
+      font-size: 1rem;
+    }
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 0.9rem;
+      background: #3b82f6;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+
+    .divider {
+      text-align: center;
+      margin: 2rem 0;
+      color: #6b7280;
+      font-size: 0.9rem;
+      position: relative;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: #e5e7eb;
+    }
+
+    .divider::before {
+      left: 0;
+    }
+
+    .divider::after {
+      right: 0;
+    }
+
+    .social-btn {
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: 0.8rem;
+    }
+
+    .auth-footer {
+      text-align: center;
+      margin-top: 1rem;
+      color: #6b7280;
+    }
+
+    .auth-footer a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+  </style>
+
 </head>
+
 <body>
+
   <header>
-    <nav>
+    <nav class="navbar">
       <div class="logo">
-        <h1><a href="index.html">Swapify</a></h1>
+        <a href="index.html">Swapify</a>
       </div>
+
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About Us</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="register.html">Register</a></li>
-        <li><a href="login.html">Login</a></li>  
+        <li><a href="login.html" class="active">Login</a></li>
       </ul>
     </nav>
   </header>
 
-  <main class="container">
-    <div class="form-container">
-      <h2>Login to Your Account</h2>
-      <form onsubmit="handleLogin(event)">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
-          <small class="error-message" id="emailError"></small>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" required>
-          <small class="error-message" id="passwordError"></small>
-        </div>
-        <button type="submit" class="btn" style="width: 100%;">Login</button>
-      </form>
-      <p style="text-align: center; margin-top: 1rem;">
-        Don't have an account? <a href="register.html">Register here</a>
-      </p>
-      <div style="text-align: center; margin-top: 1rem;">
-        <a href="#" style="color: #3498db; text-decoration: none;">Forgot your password</a>
+  <main class="auth-section">
+
+    <div class="auth-left">
+      <div>
+        <h1>Swap Smarter.</h1>
+        <p>Join Swapify and turn your unused items into valuable exchanges.</p>
       </div>
     </div>
+
+    <div class="auth-container">
+      <div class="auth-box">
+
+        <h2>Sign In</h2>
+        <p>Enter your details to access your account</p>
+
+        <form id="loginForm">
+
+          <div class="form-field">
+            <label for="email">Email</label>
+            <div class="field-wrapper">
+              <i class="fa-solid fa-envelope"></i>
+              <input type="email" id="email" name="email" required placeholder="you@example.com">
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="password">Password</label>
+            <div class="field-wrapper">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="password" name="password" required placeholder="Enter your password">
+              <button type="button" class="view-pass" onclick="togglePassword()">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-options">
+            <label><input type="checkbox" id="remember"> Remember Me</label>
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="btn-primary">Login</button>
+
+        </form>
+
+        <div class="divider">OR</div>
+
+        <button class="social-btn"><i class="fa-brands fa-google"></i> Continue with Google</button>
+        <button class="social-btn"><i class="fa-brands fa-facebook-f"></i> Continue with Facebook</button>
+
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+
+      </div>
+    </div>
+
   </main>
-  <script src="frontend/js/validation.js"></script>
+
+  <footer class="footer">
+    © 2025 Swapify • All Rights Reserved
+  </footer>
+
+  <script>
+    function togglePassword() {
+      const pass = document.getElementById('password');
+      const icon = document.querySelector('.view-pass i');
+
+      if (pass.type === 'password') {
+        pass.type = 'text';
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+      } else {
+        pass.type = 'password';
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+      }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      window.location.href = "profile.html";
+    });
+  </script>
+
 </body>
 </html>
