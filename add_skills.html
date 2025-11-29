@@ -5,222 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Skills - Swapify</title>
 
-  <link rel="stylesheet" href="style.css">
+    <link rel = "stylesheet" href="style.css">
   <link rel="stylesheet" href="frontend/css/components/navigation.css">
   <link rel="stylesheet" href="frontend/css/components/buttons.css">
   <link rel="stylesheet" href="frontend/css/components/forms.css">
   <link rel="stylesheet" href="frontend/css/components/cards.css">
-
-  <style>
-    body {
-      background: #f5f7fa;
-      font-family: "Inter", sans-serif;
-    }
-
-    .page-header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .page-header h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      color: #222;
-    }
-
-    .page-header p {
-      font-size: 1rem;
-      color: #555;
-    }
-
-    .form-container {
-      max-width: 700px;
-      background: #fff;
-      margin: auto;
-      padding: 2.5rem;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-      animation: fadeIn .5s ease;
-    }
-
-    .form-group {
-      margin-bottom: 1.4rem;
-    }
-
-    label {
-      font-weight: 600;
-      margin-bottom: .4rem;
-      display: block;
-      color: #333;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: .9rem;
-      border-radius: 10px;
-      border: 1px solid #dce0e5;
-      font-size: .95rem;
-      transition: border .2s, box-shadow .2s;
-      background: #fafbfc;
-    }
-
-    input:focus, select:focus, textarea:focus {
-      border-color: #7a5af8;
-      box-shadow: 0 0 0 3px rgba(122,90,248,0.15);
-      outline: none;
-    }
-
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .form-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .btn {
-      font-size: 1rem;
-      padding: .8rem 1.6rem;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: .25s ease;
-    }
-
-    .btn-success {
-      background: #6a4ff7;
-      color: #fff;
-      border: none;
-    }
-
-    .btn-success:hover {
-      background: #593ce6;
-      transform: translateY(-2px);
-    }
-
-    .btn-danger {
-      background: #ef4e4e;
-      color: #fff;
-      border: none;
-    }
-
-    .btn-danger:hover {
-      background: #d03c3c;
-      transform: translateY(-2px);
-    }
-
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(10px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-  </style>
 </head>
-
 <body>
-<header>
-  <nav>
-    <div class="logo">
-      <h1><a href="index.html">Swapify</a></h1>
+  <header>
+    <nav>
+      <div class="logo">
+        <h1><a href="index.html">Swapify</a></h1>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+         <li><a href="about.html">About Us</a></li>
+        <li><a href="browse_skills.html">Browse Skills</a></li>
+        <li><a href="profile.html">My Profile</a></li>
+           <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Logout</a></li>
+      </ul>
+
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>Add New Skills</h1>
+      <p>Share your expertise with the Swapify community</p>
     </div>
 
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="browse_skills.html">Browse Skills</a></li>
-      <li><a href="profile.html">My Profile</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html">Logout</a></li>
-    </ul>
-  </nav>
-</header>
+    <div class="form-container">
+      <form>
+        <div class="form-group">
+          <label for="skill-name"> Skill Name *</label>
+          <input type="text" id="skill-name" name="skill-name" placeholder="Web Development, Guitar Playing, Spanish Language .." required>
+        </div>
 
-<main class="container">
-  <div class="page-header">
-    <h1>Add New Skills</h1>
-    <p>Share your expertise with the Swapify community</p>
-  </div>
+        <div class="form-group">
+          <label for="category">Category *</label>
+          <select id="category" name="category" required>
+            <option value="">Select a category</option>
+            <option value="technology">Technology</option>
+            <option value="languages">Languages</option>
+            <option value="music">Music</option>
+            <option value="arts">Arts & Crafts</option>
+            <option value="sports">Sports & Fitness</option>
+            <option value="academic">Academic</option>
+            <option value="cooking">Cooking</option>
+            <option value="business">Business</option>
+            <option value="other">Other</option>
+            </select>
+          </div>
 
-  <div class="form-container">
-    <form onsubmit="handleAddSkill(event)">
-      <div class="form-group">
-        <label for="skill-name">Skill Name *</label>
-        <input type="text" id="skill-name" name="skill-name" placeholder="Web Development, Guitar Playing, Spanish Language..." required>
-      </div>
+          <div class="form-group">
+            <label for="skill-level">Skill Level *</label>
+            <select id="skill-level" name="skill-level" required>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+              <option value="expert">Expert</option>
+            </select>
+          </div>
 
-      <div class="form-group">
-        <label for="category">Category *</label>
-        <select id="category" name="category" required>
-          <option value="">Select a category</option>
-          <option value="technology">Technology</option>
-          <option value="languages">Languages</option>
-          <option value="music">Music</option>
-          <option value="arts">Arts & Crafts</option>
-          <option value="sports">Sports & Fitness</option>
-          <option value="academic">Academic</option>
-          <option value="cooking">Cooking</option>
-          <option value="business">Business</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
+          <div class="form-group">
+            <label for="description">Skill Description *</label>
+            <textarea id="description" name="description" placeholder="Describe what you'll teach, you teaching style, and what students can expect to lean..." required></textarea>
+          </div>
 
-      <div class="form-group">
-        <label for="skill-level">Skill Level *</label>
-        <select id="skill-level" name="skill-level" required>
-          <option value="beginner">Beginner</option>
-          <option value="intermediate">Intermediate</option>
-          <option value="advanced">Advanced</option>
-          <option value="expert">Expert</option>
-        </select>
-      </div>
+          <div class="form-group">
+            <label for="teaching-method">Teaching Method</label>
+            <select id="teaching-method" name="teaching-method">
+              <option value="">Select preferred method</option>
+              <option value="in-person">In Person</option>
+              <option value="online">Online</option>
+              <option value="both">Both</option>
+            </select>
+          </div>
 
-      <div class="form-group">
-        <label for="description">Skill Description *</label>
-        <textarea id="description" name="description" placeholder="Describe what you'll teach, your teaching style, and what students can expect..." required></textarea>
-      </div>
+          <div class="form-group">
+            <label for="location">Location (if in-person)</label>
+            <input type="text" id="location" name="location" placeholder="City, Country">
+          </div>
 
-      <div class="form-group">
-        <label for="teaching-method">Teaching Method</label>
-        <select id="teaching-method" name="teaching-method">
-          <option value="">Select preferred method</option>
-          <option value="in-person">In Person</option>
-          <option value="online">Online</option>
-          <option value="both">Both</option>
-        </select>
-      </div>
+          <div class="form-group">
+            <label for="availability">Availability</label>
+            <input type="text" id="availability" name="availability" placeholder="Weekends, Evenings, Flexible">
+          </div>
 
-      <div class="form-group">
-        <label for="location">Location (if in-person)</label>
-        <input type="text" id="location" name="location" placeholder="City, Country">
-      </div>
+          <div class="form-group">
+            <label for="tags">Tags</label>
+            <input type="text" id="tags" name="tags" placeholder="Add relevant tags separated by commas (HTML, CSS, JavaScript..)">
+          </div>
 
-      <div class="form-group">
-        <label for="availability">Availability</label>
-        <input type="text" id="availability" name="availability" placeholder="Weekends, Evenings, Flexible">
-      </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-danger" onclick="window.location.href='profile.html'">Cancel</button>
+            <button type="submit" class="btn btn-success">Add Skill</button>
+          </div>
 
-      <div class="form-group">
-        <label for="tags">Tags</label>
-        <input type="text" id="tags" name="tags" placeholder="Add relevant tags separated by commas">
-      </div>
-
-      <div class="form-actions">
-        <button type="button" class="btn btn-danger" onclick="window.location.href='profile.html'">Cancel</button>
-        <button type="submit" class="btn btn-success">Add Skill</button>
-      </div>
-    </form>
-  </div>
-</main>
-
-<script>
-  function handleAddSkill(event){
-    event.preventDefault();
-    alert('Skill added successfully!');
-    window.location.href = 'profile.html';
-  }
-</script>
-
+      </form>
+    </div>
+  </main>
+  
 </body>
 </html>
