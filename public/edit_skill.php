@@ -5,26 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Skill - Swapify</title>
 
-    <link rel = "stylesheet" href="style.css">
-  <link rel="stylesheet" href="frontend/css/components/navigation.css">
-  <link rel="stylesheet" href="frontend/css/components/buttons.css">
-  <link rel="stylesheet" href="frontend/css/components/forms.css">
-  <link rel="stylesheet" href="frontend/css/components/cards.css">
+    <link rel = "stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components/navigation.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/forms.css">
+  <link rel="stylesheet" href="css/components/cards.css">
 </head>
 <body>
   <header>
     <nav>
       <div class="logo">
-        <h1><a href="index.html">Swapify</a></h1>
+        <h1><a href="index.php">Swapify</a></h1>
       </div>
 
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About Us</a></li>
-        <li><a href="browse_skills.html">Browse Skills</a></li>
-        <li><a href="contact.html">Contact</a></li>
-         <li><a href="profile.html">My Profile</a></li>
-         <li><a href="login.html">Logout</a></li> 
+        <li><a href="index.php">Home</a></li>
+          <li><a href="about.php">About Us</a></li>
+        <li><a href="browse_skills.php">Browse Skills</a></li>
+        <li><a href="contact.php">Contact</a></li>
+         <li><a href="profile.php">My Profile</a></li>
+         <li><a href="login.php">Logout</a></li> 
         </ul>
 
     </nav>
@@ -107,7 +107,7 @@
         </div>
 
        <div class="form-actions">
-  <button type="button" class="btn btn-danger" onclick="window.location.href='profile.html'">Cancel</button>
+  <button type="button" class="btn btn-danger" onclick="window.location.href='profile.php'">Cancel</button>
   <button type="button" class="btn btn-danger" onclick="handleDeleteSkill()">Delete Skill</button>
   <button type="submit" class="btn btn-success">Update Skill</button>
 </div>
@@ -120,7 +120,7 @@
     function handleEditSkill(event){
       event.preventDefault();
       alert('Skill updated successfully!');
-      window.location.href = 'profile.html';
+      window.location.href = 'profile.php';
     }
   </script>
 </body>

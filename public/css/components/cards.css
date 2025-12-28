@@ -59,6 +59,7 @@
 
 
 .skill-card {
+  
      background: white;
     border-radius: 12px;
     padding: 2rem;
@@ -577,6 +578,13 @@
     border-radius: 50%;
     border-right-color: transparent;
     animation: spin 0.8s linear infinite;
+}
+.card-icon{
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  margin-bottom: 1rem;
+  display: block;
 }
 
 @keyframes spin {

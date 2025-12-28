@@ -1,28 +1,37 @@
+<?php
+session_start();
+
+require_once '../app/controllers/SkillController.php';
+
+$skillController = new SkillController();
+$skills = $skillController->getAllSkills();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Browse Skills - Swapify</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="frontend/css/components/navigation.css">
-  <link rel="stylesheet" href="frontend/css/components/buttons.css">
-  <link rel="stylesheet" href="frontend/css/components/forms.css">
-  <link rel="stylesheet" href="frontend/css/components/cards.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components/navigation.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/forms.css">
+  <link rel="stylesheet" href="css/components/cards.css">
 </head>
 <body>
   <header>
     <nav>
       <div class="logo">
-        <h1><a href="index.html">Swapify</a></h1>
+        <h1><a href="index.php">Swapify</a></h1>
       </div>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="browse_skills.html">Browse Skills</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="register.html">Register</a></li>
-        <li><a href="login.html">Login</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="about.php">About Us</a></li>
+        <li><a href="browse_skills.php">Browse Skills</a></li>
+        <li><a href="contact.php">Contact</a></li>
+        <li><a href="register.php">Register</a></li>
+        <li><a href="login.php">Login</a></li>
       </ul>
     </nav>
   </header>
@@ -61,6 +70,7 @@
       <div class="skills-grid">
 
         <div class="skill-card">
+
           <div class="skill-header">
             <h3>Web Development</h3>
             <span class="category technology">Technology</span>

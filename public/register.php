@@ -1,29 +1,41 @@
+<?php
+require_once '../app/controllers/AuthController.php';
+
+$auth = new AuthController();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $auth->register($_POST);
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register - Skill Swap</title>
-  <link rel = "stylesheet" href="style.css">
-  <link rel="stylesheet" href="frontend/css/components/navigation.css">
-  <link rel="stylesheet" href="frontend/css/components/buttons.css">
-  <link rel="stylesheet" href="frontend/css/components/forms.css">
+  <link rel = "stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components/navigation.css">
+  <link rel="stylesheet" href="css/components/buttons.css">
+  <link rel="stylesheet" href="css/components/forms.css">
+
 </head>
 <body>
   <header>
     <nav>
       <div class = "logo">
-        <h1><a href = "index.html">Skill Swap</a></h1>
+        <h1><a href = "index.php">Skill Swap</a></h1>
 
       </div>
 
       <ul class="nav-links">
-        <li><a href = "index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="browse_skills.html">Browse Skills</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href = "register.html">Register</a></li>
-        <li><a href = "login.html">Login</a></li>
+        <li><a href = "index.php">Home</a></li>
+        <li><a href="about.php">About Us</a></li>
+        <li><a href="browse_skills.php">Browse Skills</a></li>
+        <li><a href="contact.php">Contact</a></li>
+        <li><a href = "register.php">Register</a></li>
+        <li><a href = "login.php">Login</a></li>
       </ul>
     </nav>
   </header>
@@ -32,7 +44,7 @@
     <div class = "form-container">
       <h2>Create Your Account</h2>
 
-      <form onsubmit="handleRegister(event)">
+      <form method="POST">
         <div class = "form-group">
           <label for="name">Full Name</label>
           <input type = "text" id = "name" name = "name" required>
@@ -60,12 +72,12 @@
         <input type = "text" id = "location" name = "location" placeholder="City, Country">
        </div>
 
-       <button type="submit" class="btn" style="width: 100%;" onclick="handleRegister()">Register</button>
+      <button type="submit" class="btn" style="width: 100%;">Register</button>
 
       </form>
 
       <p style = "text-align: center; margin-top: 1rem;">
-        Already have an account? <a href = "login.html">Login here</a>
+        Already have an account? <a href = "login.php">Login here</a>
       </p>
     </div>
   </main>
