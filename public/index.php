@@ -1,3 +1,10 @@
+<?php
+require_once __DIR__ . '/../app/controllers/CategoryController.php';
+require_once __DIR__ . '/../app/helpers/imageHelper.php';
+
+$categoryController = new CategoryController();
+$categories = $categoryController->getAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +16,7 @@
   <link rel="stylesheet" href="css/components/buttons.css">
   <link rel="stylesheet" href="css/components/forms.css">
   <link rel="stylesheet" href="css/components/cards.css">
+  <link rel="stylesheet" href="css/components/browse.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
 </head>
 <body>
@@ -71,21 +79,21 @@
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">
-            <i class="fas fa-handshake" style="font-size: 3rem; color: #3498db;"></i>
+            <i class="fas fa-handshake"></i>
           </div>
           <h3>Skill Matching</h3>
           <p>Find perfect skill exchange partners based on your interests and location</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
-            <i class="fas fa-globe-americas" style="font-size: 3rem; color: #3498db;"></i>
+            <i class="fas fa-globe-americas"></i>
           </div>
           <h3>Global Community</h3>
           <p>Connect with people from different backgrounds and cultures</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">
-            <i class="fas fa-mobile-alt" style="font-size: 3rem; color: #3498db;"></i>
+            <i class="fas fa-mobile-alt"></i>
           </div>
           <h3>Easy to Use</h3>
           <p>Simple and intuitive platform designed for seamless skill sharing</p>
@@ -95,31 +103,44 @@
 
     <section class="popular-skills">
       <div class="section-header">
-        <h2>Popular Skills Right Now</h2>
-        <p>See what people are learning and teaching</p>
+        <h2>Explore Skill Categories</h2>
+        <p>Discover the types of skills you can learn and teach</p>
       </div>
-      <div class="skills-preview">
-        <div class="skill-preview-card">
-          <span class="skill-category technology">Technology</span>
-          <h4>Web Development</h4>
-          <p>HTML, CSS, JavaScript</p>
+      
+      <?php if (empty($categories)): ?>
+        <div class="no-skills-message">
+          <p>No categories available yet.</p>
         </div>
-        <div class="skill-preview-card">
-          <span class="skill-category languages">Languages</span>
-          <h4>English Practice</h4>
-          <p>Conversational Skills</p>
+      <?php else: ?>
+        <div class="home-categories-grid">
+          <?php foreach ($categories as $category): 
+            $categoryImage = getCategoryImage($category['name']);
+          ?>
+          <div class="home-category-card">
+            <div class="home-category-image-container">
+              <img src="<?= htmlspecialchars($categoryImage) ?>" alt="<?= htmlspecialchars($category['name']) ?>" class="home-category-image">
+            </div>
+            
+            <div class="home-category-content">
+              <h4><?= htmlspecialchars($category['name']) ?></h4>
+              <p class="home-category-description">
+                Explore skills in this category and connect with experts
+              </p>
+              
+              <a href="browse_skills.php?category=<?= $category['id'] ?>" class="home-category-link">
+                Browse Skills <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <?php endforeach; ?>
         </div>
-        <div class="skill-preview-card">
-          <span class="skill-category music">Music</span>
-          <h4>Guitar Lessons</h4>
-          <p>Beginner to Advanced</p>
+        
+        <div class="view-all-skills">
+          <a href="browse_skills.php" class="btn btn-primary btn-lg">
+            <i class="fas fa-search"></i> Browse All Skills
+          </a>
         </div>
-        <div class="skill-preview-card">
-          <span class="skill-category arts">Arts</span>
-          <h4>Photography</h4>
-          <p>Digital & Traditional</p>
-        </div>
-      </div>
+      <?php endif; ?>
     </section>
 
     <section class="cta-section">
