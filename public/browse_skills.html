@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swapify | Skill Exchange Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="frontend/css/components/navigation.css">
+  <link rel="stylesheet" href="frontend/css/components/buttons.css">
+  <link rel="stylesheet" href="frontend/css/components/forms.css">
+  <link rel="stylesheet" href="frontend/css/components/cards.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> 
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <h1><a href="index.html">Swapify</a></h1>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="browse_skills.html">Skills</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html" class="btn btn-outline">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero-slider">
+      <div class="slider-container">
+        <div class="slide active">
+          <div class="slide-content">
+            <h1>Exchange Skills. Build Connections.</h1>
+            <p>A trusted platform where people learn, teach, and grow together</p>
+            <a href="browse_skills.html" class="btn btn-primary btn-lg">Explore Skills</a>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-content">
+            <h1>Share What You Know</h1>
+            <p>Turn your knowledge into value by helping others learn</p>
+            <a href="register.html" class="btn btn-success btn-lg">Become a Mentor</a>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-content">
+            <h1>Learn From Real People</h1>
+            <p>Gain practical skills through meaningful exchanges</p>
+            <a href="about.html" class="btn btn-primary btn-lg">How It Works</a>
+          </div>
+        </div>
+      </div>
+      <div class="slider-nav">
+        <button class="slider-prev">‹</button>
+        <div class="slider-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <button class="slider-next">›</button>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="section-header">
+        <h2>Why Swapify?</h2>
+        <p>A smarter way to learn and share skills</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <h3>Smart Skill Matching</h3>
+          <p>Connect with users who complement your learning goals</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h3>Diverse Community</h3>
+          <p>Engage with learners and mentors from around the world</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3>Seamless Experience</h3>
+          <p>Designed for clarity, speed, and ease of use</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="popular-skills">
+      <div class="section-header">
+        <h2>Trending Skills</h2>
+        <p>What our community is exchanging right now</p>
+      </div>
+      <div class="skills-preview">
+        <div class="skill-preview-card">
+          <span class="skill-category technology">Technology</span>
+          <h4>Web Development</h4>
+          <p>Frontend & Backend Fundamentals</p>
+        </div>
+        <div class="skill-preview-card">
+          <span class="skill-category languages">Languages</span>
+          <h4>English Communication</h4>
+          <p>Speaking & Fluency Practice</p>
+        </div>
+        <div class="skill-preview-card">
+          <span class="skill-category music">Music</span>
+          <h4>Guitar</h4>
+          <p>Technique, Theory, Performance</p>
+        </div>
+        <div class="skill-preview-card">
+          <span class="skill-category arts">Creative Arts</span>
+          <h4>Photography</h4>
+          <p>Composition & Editing</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="cta-content">
+        <h2>Start Learning Smarter Today</h2>
+        <p>Create your account and begin exchanging skills in minutes</p>
+        <div class="cta-buttons">
+          <a href="register.html" class="btn btn-primary btn-lg">Join Swapify</a>
+          <a href="browse_skills.html" class="btn btn-outline btn-lg">Browse Skills</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.dot');
+      const prevBtn = document.querySelector('.slider-prev');
+      const nextBtn = document.querySelector('.slider-next');
+      let currentSlide = 0;
+
+      function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        currentSlide = (n + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+      }
+
+      nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+      prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+      setInterval(() => showSlide(currentSlide + 1), 5000);
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => showSlide(index));
+      });
+    });
+  </script>
+</body>
+</html>
