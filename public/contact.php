@@ -41,25 +41,25 @@
         <form id="contactForm" novalidate>
           
           <div class="form-group">
-            <label for="name">Full Name <span class="required">*</span></label>
+            <label for="name">Full Name <span class="required"></span></label>
             <input type="text" id="name" name="name" placeholder="Your full name" required>
             <small class="error-message" id="nameError"></small>
           </div>
 
           <div class="form-group">
-            <label for="email">Email Address <span class="required">*</span></label>
+            <label for="email">Email Address <span class="required"></span></label>
             <input type="email" id="email" name="email" placeholder="you@example.com" required>
             <small class="error-message" id="emailError"></small>
           </div>
 
           <div class="form-group">
-            <label for="subject">Subject <span class="required">*</span></label>
+            <label for="subject">Subject <span class="required"></span></label>
             <input type="text" id="subject" name="subject" placeholder="Message subject" required>
             <small class="error-message" id="subjectError"></small>
           </div>
 
           <div class="form-group">
-            <label for="message">Message <span class="required">*</span></label>
+            <label for="message">Message <span class="required"></span></label>
             <textarea id="message" name="message" rows="6" placeholder="Type your message here..." required></textarea>
             <small class="error-message" id="messageError"></small>
           </div>
@@ -76,12 +76,12 @@
         <h2>Find Us</h2>
         <p class="location-address">
           <i class="fas fa-map-marker-alt"></i>
-          Rruga Xhevded Doda, Prishtina 10000
+          Rruga Xhevdet Doda, Prishtina 10000
         </p>
       </div>
       <div class="map-container">
         <iframe 
-          src="https://maps.google.com/maps?q=Rruga+Xhevded+Doda,+Prishtina+10000&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+          src="https://maps.google.com/maps?q=Rruga+Xhevdet+Doda,+Prishtina+10000&t=&z=13&ie=UTF8&iwloc=&output=embed" 
           width="100%" 
           height="450" 
           style="border:0;" 
@@ -137,7 +137,7 @@
           </div>
           <div class="footer-contact-item">
             <i class="fas fa-phone"></i>
-            <span>+383 49 000 000</span>
+            <span>+383 49 110 111</span>
           </div>
           <div class="footer-contact-item">
             <i class="fas fa-map-marker-alt"></i>
