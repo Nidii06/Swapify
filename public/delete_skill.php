@@ -1,11 +1,32 @@
-<h2>My Skills</h2>
+<?php
+require_once '../app/helpers/Session.php';
+require_once '../app/helpers/flash.php';
+require_once '../app/controllers/SkillController.php';
 
-<?php foreach ($skills as $skill): ?>
-    <div>
-        <strong><?php echo htmlspecialchars($skill['title']); ?></strong>
-        (<?php echo htmlspecialchars($skill['level']); ?>)
-        <p><?php echo htmlspecialchars($skill['description']); ?></p>
+$session = Session::getInstance();
 
-        <a href="delete_skill.php?id=<?php echo $skill['id']; ?>">Delete</a>
-    </div>
-<?php endforeach; ?>
+if (!$session->isLoggedIn()) {
+    header("Location: login.php");
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || empty($_POST['id'])) {
+    setFlash('error', 'Invalid delete request.');
+    header("Location: profile.php");
+    exit;
+}
+
+$skillId = (int) $_POST['id'];
+$user = $session->user();
+$userId = $user['id'];
+
+$controller = new SkillController();
+
+if ($controller->delete($skillId, $userId)) {
+    setFlash('success', 'Skill deleted successfully!');
+} else {
+    setFlash('error', 'Failed to delete skill.');
+}
+
+header("Location: profile.php");
+exit;

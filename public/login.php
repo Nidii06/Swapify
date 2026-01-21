@@ -1,17 +1,18 @@
 <?php
-session_start();
+require_once '../app/helpers/Session.php';
 require_once '../app/controllers/AuthController.php';
 
+$session = Session::getInstance();
 $auth = new AuthController();
-
 $error_message = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
 
     if ($auth->login($email, $password)) {
-        if ($_SESSION['user']['role'] === 'admin') {
+        $user = $session->user();
+        if ($user['role'] === 'admin') {
             header("Location: ../admin/dashboard.php");
         } else {
             header("Location: profile.php");
@@ -55,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <h2>Login to Your Account</h2>
 
       <?php if (!empty($error_message)): ?>
-        <p style="color: red; text-align: center;"><?php echo $error_message; ?></p>
+        <div class="flash flash-error"><?php echo htmlspecialchars($error_message); ?></div>
       <?php endif; ?>
 
       <form method="POST" action="">
@@ -67,10 +68,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <label for="password">Password</label>
           <input type="password" id="password" name="password" required>
         </div>
-        <button type="submit" class="btn" style="width: 100%;">Login</button>
+        <button type="submit" class="btn btn-full">Login</button>
       </form>
 
-      <p style="text-align: center; margin-top: 1rem;">
+      <p class="form-footer">
         Don't have an account? <a href="register.php">Register here</a>
       </p>
     </div>

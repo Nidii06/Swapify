@@ -1,12 +1,14 @@
 <?php
-session_start();
+require_once '../app/helpers/Session.php';
 
-if (!isset($_SESSION['user'])) {
+$session = Session::getInstance();
+
+if (!$session->isLoggedIn()) {
     header("Location: ../public/login.php");
     exit;
 }
 
-if ($_SESSION['user']['role'] !== 'admin') {
+if (!$session->isAdmin()) {
     header("Location: ../public/profile.php");
     exit;
 }

@@ -85,22 +85,22 @@
 
                 <div class="form-group">
           <label>Notification Preferences</label>
-          <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+          <div class="checkbox-group">
 
-            <label style="display: flex; align-items: center; gap: 0.5rem;">
+            <label class="checkbox-label">
               <input type="checkbox" name="notifications" value="email" checked> Email notifications
             </label>
-            <label style="display: flex; align-items: center; gap: 0.5rem;">
+            <label class="checkbox-label">
               <input type="checkbox" name="notifications" value="skill-matches" checked> New skill matches
             </label>
-            <label style="display: flex; align-items: center; gap: 0.5rem;">
+            <label class="checkbox-label">
               <input type="checkbox" name="notifications" value="messages"> Direct messages
             </label>
           </div>
         </div>
 
          <div class="form-actions">
-          <button type="button" class="btn btn-danger" onclick="window.location.href='profile.php'">Cancel</button>
+          <a href="profile.php" class="btn btn-danger">Cancel</a>
           <button type="submit" class="btn btn-success">Update Profile</button>
         </div>
       </form>
@@ -114,10 +114,6 @@
       window.location.href = 'profile.php';
     });
   </script>
-
-      </form>
-    </div>
-  </main>
   
 </body>
 </html>

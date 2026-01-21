@@ -3,13 +3,28 @@ require_once __DIR__ . '/../app/controllers/CategoryController.php';
 require_once __DIR__ . '/../app/helpers/imageHelper.php';
 
 $categoryController = new CategoryController();
-$categories = $categoryController->getAll();
+$allCategories = $categoryController->getAll();
+
+$imageMap = [];
+$filteredCategories = [];
+
+foreach ($allCategories as $category) {
+    $categoryImage = getCategoryImage($category['name']);
+    $imageKey = basename($categoryImage);
+    
+    if (!isset($imageMap[$imageKey])) {
+        $filteredCategories[] = $category;
+        $imageMap[$imageKey] = true;
+    }
+}
+
+$categories = $filteredCategories;
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Swapify - Home</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/components/navigation.css">
@@ -27,10 +42,10 @@ $categories = $categoryController->getAll();
       </div>
       <ul class="nav-links">
         <li><a href="index.php">Home</a></li>
-        <li><a href="about.php">About Us</a></li>
         <li><a href="browse_skills.php">Browse Skills</a></li>
         <li><a href="contact.php">Contact</a></li>
         <li><a href="login.php">Login</a></li>
+        <li><a href="register.php">Register</a></li>
       </ul>
     </nav>
   </header>

@@ -1,127 +1,163 @@
+<?php
+require_once '../app/helpers/Session.php';
+require_once '../app/helpers/flash.php';
+require_once '../app/controllers/SkillController.php';
+require_once '../app/controllers/CategoryController.php';
+
+$session = Session::getInstance();
+
+if (!$session->isLoggedIn()) {
+    header("Location: login.php");
+    exit;
+}
+
+if (!isset($_GET['id'])) {
+    header("Location: profile.php");
+    exit;
+}
+
+$skillId = (int) $_GET['id'];
+$user = $session->user();
+$userId = $user['id'];
+
+$skillController = new SkillController();
+$categoryController = new CategoryController();
+
+$skill = $skillController->getById($skillId, $userId);
+$categories = $categoryController->getAll();
+
+if (!$skill) {
+    setFlash('error', 'Skill not found.');
+    header("Location: profile.php");
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if (
+        empty($_POST['title']) ||
+        empty($_POST['category_id']) ||
+        empty($_POST['description']) ||
+        empty($_POST['level'])
+    ) {
+        setFlash('error', 'All required fields must be filled.');
+        header("Location: edit_skill.php?id=" . $skillId);
+        exit;
+    }
+
+    $skillController->update($skillId, $_POST, $userId);
+    setFlash('success', 'Skill updated successfully!');
+    header("Location: profile.php");
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Edit Skill - Swapify</title>
 
-    <link rel = "stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/components/navigation.css">
   <link rel="stylesheet" href="css/components/buttons.css">
   <link rel="stylesheet" href="css/components/forms.css">
-  <link rel="stylesheet" href="css/components/cards.css">
 </head>
+
 <body>
-  <header>
-    <nav>
-      <div class="logo">
-        <h1><a href="index.php">Swapify</a></h1>
-      </div>
 
-      <ul class="nav-links">
-        <li><a href="index.php">Home</a></li>
-          <li><a href="about.php">About Us</a></li>
-        <li><a href="browse_skills.php">Browse Skills</a></li>
-        <li><a href="contact.php">Contact</a></li>
-         <li><a href="profile.php">My Profile</a></li>
-         <li><a href="login.php">Logout</a></li> 
-        </ul>
-
-    </nav>
-  </header>
-
-  <main class="container">
-    <div class="page-header">
-      <h1>Edit Skills</h1>
-      <p>Update your skill information</p>
+<header>
+  <nav>
+    <div class="logo">
+      <h1><a href="index.php">Swapify</a></h1>
     </div>
+    <ul class="nav-links">
+      <li><a href="profile.php">My Profile</a></li>
+      <li><a href="logout.php">Logout</a></li>
+    </ul>
+  </nav>
+</header>
 
-    <div class="form-container">
-<form onsubmit="handleEditSkill(event)">  
-  <div class="form-group">
-    <label for="skill-name">Skill Name *</label>
-    <input type="text" id="skill-name" name="skill-name" value="Web Development" required>
+<main class="container">
+
+  <div class="page-header">
+    <h1>Edit Skill</h1>
+    <p>Update your skill information</p>
   </div>
 
-     <div class="form-group">
-          <label for="category">Category *</label>
-          <select id="category" name="category" required>
-            <option value="technology" selected>Technology</option>
-            <option value="languages">Languages</option>
-            <option value="music">Music</option>
-            <option value="arts">Arts & Crafts</option>
-            <option value="sports">Sports & Fitness</option>
-            <option value="academic">Academic</option>
-            <option value="cooking">Cooking</option>
-            <option value="business">Business</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+  <div class="form-container">
+    <form method="POST">
 
-                <div class="form-group">
-          <label for="skill-level">Skill Level *</label>
-          <select id="skill-level" name="skill-level" required>
-            <option value="beginner">Beginner</option>
-            <option value="intermediate" selected>Intermediate</option>
-            <option value="advanced">Advanced</option>
-            <option value="expert">Expert</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label>Skill Title *</label>
+        <input type="text" name="title"
+               value="<?php echo htmlspecialchars($skill['title']); ?>" required>
+      </div>
 
-        <div class="form-group">
-          <label for="description">Skill Description *</label>
-          <textarea id="description" name="description" required>Teaching HTML, CSS, JavaScript and modern web development frameworks. Perfect for beginners who want to start their web development journey.</textarea>
-        </div>
+      <div class="form-group">
+        <label>Category *</label>
+        <select name="category_id" required>
+          <?php foreach ($categories as $category): ?>
+            <option value="<?php echo $category['id']; ?>"
+              <?php if ($category['id'] == $skill['category_id']) echo 'selected'; ?>>
+              <?php echo htmlspecialchars($category['name']); ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
+      </div>
 
-        <div class="form-group">
-          <label for="teaching-method">Teaching Method</label>
-          <select id="teaching-method" name="teaching-method">
-            <option value="in-person">In Person</option>
-            <option value="online" selected>Online</option>
-            <option value="both">Both</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label>Skill Level *</label>
+        <select name="level" required>
+          <?php
+          $levels = ['beginner', 'intermediate', 'advanced', 'expert'];
+          foreach ($levels as $level):
+          ?>
+            <option value="<?php echo $level; ?>"
+              <?php if ($skill['level'] === $level) echo 'selected'; ?>>
+              <?php echo ucfirst($level); ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
+      </div>
 
-        <div class="form-group">
-          <label for="location">Location (if in-person)</label>
-          <input type="text" id="location" name="location" value="Prishtina, Kosova">
-        </div>
+      <div class="form-group">
+        <label>Description *</label>
+        <textarea name="description" rows="4" required><?php
+            echo htmlspecialchars($skill['description']);
+        ?></textarea>
+      </div>
 
-        <div class="form-group">
-          <label for="availability">Availability</label>
-          <input type="text" id="availability" name="availability" value="Weekends and Evenings">
-        </div>
+      <div class="form-group">
+        <label>Teaching Method</label>
+        <select name="teaching_method">
+          <?php
+          $methods = ['online', 'in-person', 'both'];
+          foreach ($methods as $method):
+          ?>
+            <option value="<?php echo $method; ?>"
+              <?php if ($skill['teaching_method'] === $method) echo 'selected'; ?>>
+              <?php echo ucfirst($method); ?>
+            </option>
+          <?php endforeach; ?>
+        </select>
+      </div>
 
-         <div class="form-group">
-          <label for="tags">Tags</label>
-          <input type="text" id="tags" name="tags" value="HTML, CSS, JavaScript, Web Development, Frontend">
-        </div>
+      <div class="form-group">
+        <label>Location</label>
+        <input type="text" name="location"
+               value="<?php echo htmlspecialchars($skill['location']); ?>">
+      </div>
 
-        <div class="form-group">
-          <label for="status">Status</label>
-          <select id="status" name="status">
-            <option value="active" selected>Active</option>
-            <option value="inactive">Inactive</option>
-            <option value="paused">Paused</option>
-          </select>
-        </div>
+      <div class="form-actions">
+        <a href="profile.php" class="btn btn-danger">Cancel</a>
+        <button type="submit" class="btn btn-success">Update Skill</button>
+      </div>
 
-       <div class="form-actions">
-  <button type="button" class="btn btn-danger" onclick="window.location.href='profile.php'">Cancel</button>
-  <button type="button" class="btn btn-danger" onclick="handleDeleteSkill()">Delete Skill</button>
-  <button type="submit" class="btn btn-success">Update Skill</button>
-</div>
     </form>
-    </div>
+  </div>
 
-  </main>
+</main>
 
-  <script>
-    function handleEditSkill(event){
-      event.preventDefault();
-      alert('Skill updated successfully!');
-      window.location.href = 'profile.php';
-    }
-  </script>
 </body>
 </html>

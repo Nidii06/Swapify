@@ -1,10 +1,19 @@
 <?php
+require_once '../app/helpers/flash.php';
 require_once '../app/controllers/AuthController.php';
 
 $auth = new AuthController();
+$error_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $auth->register($_POST);
+    $result = $auth->register($_POST);
+    if ($result['success']) {
+        setFlash('success', 'Registration successful! Please login.');
+        header("Location: login.php");
+        exit;
+    } else {
+        $error_message = implode(', ', $result['errors']);
+    }
 }
 ?>
 
@@ -14,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - Skill Swap</title>
+  <title>Register - Swapify</title>
   <link rel = "stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/components/navigation.css">
   <link rel="stylesheet" href="css/components/buttons.css">
@@ -24,9 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
   <header>
     <nav>
-      <div class = "logo">
-        <h1><a href = "index.php">Skill Swap</a></h1>
-
+      <div class="logo">
+        <h1><a href="index.php">Swapify</a></h1>
       </div>
 
       <ul class="nav-links">
@@ -40,9 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </nav>
   </header>
 
-  <main class = "container">
-    <div class = "form-container">
+  <main class="container">
+    <div class="form-container">
       <h2>Create Your Account</h2>
+
+      <?php if (!empty($error_message)): ?>
+        <div class="flash flash-error"><?php echo htmlspecialchars($error_message); ?></div>
+      <?php endif; ?>
 
       <form method="POST">
         <div class = "form-group">
@@ -72,12 +84,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type = "text" id = "location" name = "location" placeholder="City, Country">
        </div>
 
-      <button type="submit" class="btn" style="width: 100%;">Register</button>
+      <button type="submit" class="btn btn-full">Register</button>
 
       </form>
 
-      <p style = "text-align: center; margin-top: 1rem;">
-        Already have an account? <a href = "login.php">Login here</a>
+      <p class="form-footer">
+        Already have an account? <a href="login.php">Login here</a>
       </p>
     </div>
   </main>

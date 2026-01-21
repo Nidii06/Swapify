@@ -60,7 +60,7 @@
 
       <div class="about-section">
         <h2>Our Story</h2>
-        <p>Founded in 2024, Swapify began as a university project aimed at creating meaningful connections between people through knowledge exchange. What started as a simple idea has grown into a community-driven platform.</p>
+        <p>Founded in 2025, Swapify began as a small project aimed at creating meaningful connections between people through knowledge exchange. What started as a simple idea has grown into a community-driven platform.</p>
       </div>
     </section>
     </main>
