@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once '../app/helpers/Session.php';
 require_once '../app/controllers/AuthController.php';
 
@@ -10,13 +12,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
+    // Check if this is the admin account
+    $admin_email = 'admin@swapify.com';
+    $admin_password = 'admin123';
+
+    if ($email === $admin_email && $password === $admin_password) {
+        // Create admin session
+        $_SESSION['admin'] = [
+            'email' => $email,
+            'login_time' => date('Y-m-d H:i:s')
+        ];
+        header("Location: ../admin/dashboard.php");
+        exit;
+    }
+
+    // Regular user login
     if ($auth->login($email, $password)) {
-        $user = $session->user();
-        if ($user['role'] === 'admin') {
-            header("Location: ../admin/dashboard.php");
-        } else {
-            header("Location: profile.php");
-        }
+        header("Location: profile.php");
         exit;
     } else {
         $error_message = "Invalid email or password.";
@@ -74,6 +86,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <p class="form-footer">
         Don't have an account? <a href="register.php">Register here</a>
       </p>
+
+       
+        </p>
+      </div>
     </div>
   </main>
 </body>

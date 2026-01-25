@@ -64,8 +64,10 @@
             <small class="error-message" id="messageError"></small>
           </div>
 
+          <div id="successMessage" style="display:none; background-color: #d4edda; color: #155724; padding: 12px 20px; border-radius: 5px; margin-bottom: 20px; border-left: 4px solid #28a745;"></div>
+
           <div class="form-actions">
-            <button type="submit" class="btn btn-success">Send Message</button>
+            <button type="submit" class="btn btn-primary-blue"><i class="fas fa-paper-plane"></i> Send Message</button>
           </div>
         </form>
       </div>
@@ -152,6 +154,81 @@
     </div>
   </footer>
 
-  <script src="frontend/js/validation.js"></script>
-</body>
-</html>
+  <script src="js/validation.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      // Clear previous error messages
+      document.getElementById('nameError').textContent = '';
+      document.getElementById('emailError').textContent = '';
+      document.getElementById('subjectError').textContent = '';
+      document.getElementById('messageError').textContent = '';
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      let hasError = false;
+
+      // Validation
+      if (!name) {
+        document.getElementById('nameError').textContent = 'Full name is required';
+        hasError = true;
+      }
+      
+      if (!email) {
+        document.getElementById('emailError').textContent = 'Email is required';
+        hasError = true;
+      } else if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+        document.getElementById('emailError').textContent = 'Please enter a valid email';
+        hasError = true;
+      }
+      
+      if (!subject) {
+        document.getElementById('subjectError').textContent = 'Subject is required';
+        hasError = true;
+      }
+      
+      if (!message) {
+        document.getElementById('messageError').textContent = 'Message is required';
+        hasError = true;
+      }
+
+      if (hasError) return;
+
+      // Submit form
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('subject', subject);
+      formData.append('message', message);
+
+      try {
+        const response = await fetch('handle_contact.php', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          document.getElementById('successMessage').textContent = '✓ ' + data.message;
+          document.getElementById('successMessage').style.display = 'block';
+          document.getElementById('contactForm').reset();
+          
+          // Hide success message after 5 seconds
+          setTimeout(() => {
+            document.getElementById('successMessage').style.display = 'none';
+          }, 5000);
+        } else {
+          alert('Error: ' + data.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to send message. Please try again later.');
+      }
+    });
+  </script>
+

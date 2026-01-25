@@ -7,16 +7,16 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
-require_once '../app/models/User.php';
+require_once '../app/models/Category.php';
 
-$userModel = new User();
-$users = $userModel->findAll() ?? [];
+$categoryModel = new Category();
+$categories = $categoryModel->getAll() ?? [];
 
 // Handle delete
 if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
     $id = (int)$_GET['id'];
-    $userModel->delete($id);
-    header("Location: users.php?success=deleted");
+    $categoryModel->delete($id);
+    header("Location: categories.php?success=deleted");
     exit;
 }
 
@@ -27,7 +27,7 @@ $success_message = $_GET['success'] ?? '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Users - Swapify Admin</title>
+    <title>Manage Categories - Swapify Admin</title>
     <link rel="stylesheet" href="../public/css/style.css">
     <link rel="stylesheet" href="../public/css/components/buttons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -216,7 +216,7 @@ $success_message = $_GET['success'] ?? '';
                 </a>
             </li>
             <li>
-                <a href="users.php" class="active">
+                <a href="users.php">
                     <i class="fas fa-users"></i> Users
                 </a>
             </li>
@@ -226,7 +226,7 @@ $success_message = $_GET['success'] ?? '';
                 </a>
             </li>
             <li>
-                <a href="categories.php">
+                <a href="categories.php" class="active">
                     <i class="fas fa-layer-group"></i> Categories
                 </a>
             </li>
@@ -251,44 +251,38 @@ $success_message = $_GET['success'] ?? '';
         <div class="admin-header">
             <div>
                 <h1>
-                    <i class="fas fa-users"></i> Manage Users
+                    <i class="fas fa-layer-group"></i> Manage Categories
                 </h1>
             </div>
         </div>
 
         <?php if (!empty($success_message)): ?>
             <div class="success-message">
-                <i class="fas fa-check-circle"></i> User <?= ucfirst($success_message) ?> successfully!
+                <i class="fas fa-check-circle"></i> Category <?= ucfirst($success_message) ?> successfully!
             </div>
         <?php endif; ?>
 
         <div class="table-container">
-            <?php if (!empty($users)): ?>
+            <?php if (!empty($categories)): ?>
                 <table>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Full Name</th>
-                            <th>Email</th>
-                            <th>Location</th>
-                            <th>Joined</th>
+                            <th>Name</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($users as $user): ?>
+                        <?php foreach ($categories as $category): ?>
                             <tr>
-                                <td><?= htmlspecialchars($user['id']) ?></td>
-                                <td><?= htmlspecialchars($user['full_name'] ?? 'N/A') ?></td>
-                                <td><?= htmlspecialchars($user['email']) ?></td>
-                                <td><?= htmlspecialchars($user['location'] ?? 'N/A') ?></td>
-                                <td><?= date('M d, Y', strtotime($user['created_at'] ?? date('Y-m-d'))) ?></td>
+                                <td><?= htmlspecialchars($category['id']) ?></td>
+                                <td><?= htmlspecialchars($category['name']) ?></td>
                                 <td>
                                     <div class="action-buttons">
-                                        <a href="users.php?action=edit&id=<?= $user['id'] ?>" class="btn-edit">
+                                        <a href="categories.php?action=edit&id=<?= $category['id'] ?>" class="btn-edit">
                                             <i class="fas fa-edit"></i> Edit
                                         </a>
-                                        <button type="button" class="btn-delete" onclick="if(confirm('Are you sure?')) window.location.href='users.php?action=delete&id=<?= $user['id'] ?>'">
+                                        <button type="button" class="btn-delete" onclick="if(confirm('Are you sure?')) window.location.href='categories.php?action=delete&id=<?= $category['id'] ?>'">
                                             <i class="fas fa-trash"></i> Delete
                                         </button>
                                     </div>
@@ -300,7 +294,7 @@ $success_message = $_GET['success'] ?? '';
             <?php else: ?>
                 <div class="no-data">
                     <i class="fas fa-inbox" style="font-size: 48px; color: #ccc; margin-bottom: 20px;"></i>
-                    <p>No users found</p>
+                    <p>No categories found</p>
                 </div>
             <?php endif; ?>
         </div>

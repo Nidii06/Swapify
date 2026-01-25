@@ -7,17 +7,35 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
-require_once '../app/models/User.php';
+require_once '../app/core/Database.php';
 
-$userModel = new User();
-$users = $userModel->findAll() ?? [];
+// Get contacts from database
+try {
+    $db = Database::getInstance();
+    $conn = $db->getConnection();
+    
+    $query = "SELECT id, name, email, subject, message, created_at FROM contacts ORDER BY created_at DESC";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $contacts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    $contacts = [];
+}
 
 // Handle delete
 if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
     $id = (int)$_GET['id'];
-    $userModel->delete($id);
-    header("Location: users.php?success=deleted");
-    exit;
+    try {
+        $db = Database::getInstance();
+        $conn = $db->getConnection();
+        $query = "DELETE FROM contacts WHERE id = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([$id]);
+        header("Location: contacts.php?success=deleted");
+        exit;
+    } catch (Exception $e) {
+        // Handle error silently
+    }
 }
 
 $success_message = $_GET['success'] ?? '';
@@ -27,7 +45,7 @@ $success_message = $_GET['success'] ?? '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Users - Swapify Admin</title>
+    <title>Manage Contacts - Swapify Admin</title>
     <link rel="stylesheet" href="../public/css/style.css">
     <link rel="stylesheet" href="../public/css/components/buttons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -96,9 +114,6 @@ $success_message = $_GET['success'] ?? '';
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
@@ -153,7 +168,7 @@ $success_message = $_GET['success'] ?? '';
             gap: 10px;
         }
 
-        .btn-edit {
+        .btn-view {
             background-color: #2a5298;
             color: white;
             padding: 8px 12px;
@@ -161,9 +176,11 @@ $success_message = $_GET['success'] ?? '';
             text-decoration: none;
             font-size: 12px;
             transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
-        .btn-edit:hover {
+        .btn-view:hover {
             background-color: #1e3c72;
         }
 
@@ -188,6 +205,76 @@ $success_message = $_GET['success'] ?? '';
             color: #666;
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .modal-body {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .modal-body p {
+            margin-bottom: 15px;
+        }
+
+        .modal-body strong {
+            color: #333;
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
         @media (max-width: 768px) {
             .admin-sidebar {
                 width: 100%;
@@ -197,6 +284,10 @@ $success_message = $_GET['success'] ?? '';
 
             .admin-content {
                 margin-left: 0;
+            }
+
+            .table-container {
+                overflow-x: auto;
             }
         }
     </style>
@@ -216,7 +307,7 @@ $success_message = $_GET['success'] ?? '';
                 </a>
             </li>
             <li>
-                <a href="users.php" class="active">
+                <a href="users.php">
                     <i class="fas fa-users"></i> Users
                 </a>
             </li>
@@ -231,7 +322,7 @@ $success_message = $_GET['success'] ?? '';
                 </a>
             </li>
             <li>
-                <a href="contacts.php">
+                <a href="contacts.php" class="active">
                     <i class="fas fa-envelope"></i> Contacts
                 </a>
             </li>
@@ -249,46 +340,44 @@ $success_message = $_GET['success'] ?? '';
     <!-- Main Content -->
     <div class="admin-content">
         <div class="admin-header">
-            <div>
-                <h1>
-                    <i class="fas fa-users"></i> Manage Users
-                </h1>
-            </div>
+            <h1>
+                <i class="fas fa-envelope"></i> Manage Contacts
+            </h1>
         </div>
 
         <?php if (!empty($success_message)): ?>
             <div class="success-message">
-                <i class="fas fa-check-circle"></i> User <?= ucfirst($success_message) ?> successfully!
+                <i class="fas fa-check-circle"></i> Contact <?= ucfirst($success_message) ?> successfully!
             </div>
         <?php endif; ?>
 
         <div class="table-container">
-            <?php if (!empty($users)): ?>
+            <?php if (!empty($contacts)): ?>
                 <table>
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Full Name</th>
+                            <th>Name</th>
                             <th>Email</th>
-                            <th>Location</th>
-                            <th>Joined</th>
+                            <th>Subject</th>
+                            <th>Date</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($users as $user): ?>
+                        <?php foreach ($contacts as $contact): ?>
                             <tr>
-                                <td><?= htmlspecialchars($user['id']) ?></td>
-                                <td><?= htmlspecialchars($user['full_name'] ?? 'N/A') ?></td>
-                                <td><?= htmlspecialchars($user['email']) ?></td>
-                                <td><?= htmlspecialchars($user['location'] ?? 'N/A') ?></td>
-                                <td><?= date('M d, Y', strtotime($user['created_at'] ?? date('Y-m-d'))) ?></td>
+                                <td><?= htmlspecialchars($contact['id']) ?></td>
+                                <td><?= htmlspecialchars($contact['name']) ?></td>
+                                <td><?= htmlspecialchars($contact['email']) ?></td>
+                                <td><?= htmlspecialchars(substr($contact['subject'], 0, 30)) ?><?= strlen($contact['subject']) > 30 ? '...' : '' ?></td>
+                                <td><?= date('M d, Y H:i', strtotime($contact['created_at'])) ?></td>
                                 <td>
                                     <div class="action-buttons">
-                                        <a href="users.php?action=edit&id=<?= $user['id'] ?>" class="btn-edit">
-                                            <i class="fas fa-edit"></i> Edit
-                                        </a>
-                                        <button type="button" class="btn-delete" onclick="if(confirm('Are you sure?')) window.location.href='users.php?action=delete&id=<?= $user['id'] ?>'">
+                                        <button type="button" class="btn-view" onclick="viewContact(<?= $contact['id'] ?>, '<?= addslashes($contact['name']) ?>', '<?= addslashes($contact['email']) ?>', '<?= addslashes($contact['subject']) ?>', '<?= addslashes($contact['message']) ?>', '<?= $contact['created_at'] ?>')">
+                                            <i class="fas fa-eye"></i> View
+                                        </button>
+                                        <button type="button" class="btn-delete" onclick="if(confirm('Are you sure?')) window.location.href='contacts.php?action=delete&id=<?= $contact['id'] ?>'">
                                             <i class="fas fa-trash"></i> Delete
                                         </button>
                                     </div>
@@ -300,12 +389,52 @@ $success_message = $_GET['success'] ?? '';
             <?php else: ?>
                 <div class="no-data">
                     <i class="fas fa-inbox" style="font-size: 48px; color: #ccc; margin-bottom: 20px;"></i>
-                    <p>No users found</p>
+                    <p>No contacts found</p>
                 </div>
             <?php endif; ?>
         </div>
     </div>
 </div>
+
+<!-- Contact Details Modal -->
+<div id="contactModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Contact Details</h2>
+            <button type="button" class="close-btn" onclick="closeModal()">×</button>
+        </div>
+        <div class="modal-body">
+            <p><strong>Name:</strong> <span id="modalName"></span></p>
+            <p><strong>Email:</strong> <span id="modalEmail"></span></p>
+            <p><strong>Date:</strong> <span id="modalDate"></span></p>
+            <p><strong>Subject:</strong> <span id="modalSubject"></span></p>
+            <p><strong>Message:</strong></p>
+            <p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; white-space: pre-wrap;" id="modalMessage"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+function viewContact(id, name, email, subject, message, createdAt) {
+    document.getElementById('modalName').textContent = name;
+    document.getElementById('modalEmail').textContent = email;
+    document.getElementById('modalSubject').textContent = subject;
+    document.getElementById('modalMessage').textContent = message;
+    document.getElementById('modalDate').textContent = new Date(createdAt).toLocaleString();
+    document.getElementById('contactModal').classList.add('show');
+}
+
+function closeModal() {
+    document.getElementById('contactModal').classList.remove('show');
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('contactModal');
+    if (event.target == modal) {
+        modal.classList.remove('show');
+    }
+}
+</script>
 
 </body>
 </html>

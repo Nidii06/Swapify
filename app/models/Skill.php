@@ -171,6 +171,14 @@ class Skill extends BaseModel
         );
     }
 
+    public function deleteById(int $id): bool
+    {
+        return $this->execute(
+            "DELETE FROM skills WHERE id = :id",
+            ['id' => $id]
+        );
+    }
+
     public function findById(int $id, int $userId): ?array
     {
         return $this->fetchOne(

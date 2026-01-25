@@ -89,13 +89,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <form method="POST">
 
       <div class="form-group">
-        <label>Skill Title *</label>
+        <label>Skill Title </label>
         <input type="text" name="title"
                value="<?php echo htmlspecialchars($skill['title']); ?>" required>
       </div>
 
       <div class="form-group">
-        <label>Category *</label>
+        <label>Category </label>
         <select name="category_id" required>
           <?php foreach ($categories as $category): ?>
             <option value="<?php echo $category['id']; ?>"
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <div class="form-group">
-        <label>Skill Level *</label>
+        <label>Skill Level </label>
         <select name="level" required>
           <?php
           $levels = ['beginner', 'intermediate', 'advanced', 'expert'];
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <div class="form-group">
-        <label>Description *</label>
+        <label>Description </label>
         <textarea name="description" rows="4" required><?php
             echo htmlspecialchars($skill['description']);
         ?></textarea>
@@ -150,8 +150,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <div class="form-actions">
-        <a href="profile.php" class="btn btn-danger">Cancel</a>
-        <button type="submit" class="btn btn-success">Update Skill</button>
+        <a href="profile.php" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Update Skill</button>
       </div>
 
     </form>

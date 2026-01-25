@@ -49,10 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Skill - Swapify</title>
 
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/components/navigation.css">
-  <link rel="stylesheet" href="css/components/buttons.css">
-  <link rel="stylesheet" href="css/components/forms.css">
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/components/navigation.css?v=4">
+  <link rel="stylesheet" href="css/components/buttons.css?v=4">
+  <link rel="stylesheet" href="css/components/forms.css?v=4">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
@@ -73,21 +74,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <main class="container">
 
-  <div class="page-header">
-    <h1>Add New Skill</h1>
-    <p>Share your expertise with the community</p>
+  <div class="skill-page-hero">
+    <div class="skill-hero-content">
+      <h1> Add New Skill</h1>
+      <p>Share your expertise with the community and help others learn</p>
+    </div>
   </div>
 
-  <div class="form-container">
+  <div class="form-wrapper">
     <form method="POST">
 
       <div class="form-group">
-        <label>Skill Title *</label>
+        <label>Skill Title </label>
         <input type="text" name="title" required>
       </div>
 
       <div class="form-group">
-        <label>Category *</label>
+        <label>Category </label>
         <select name="category_id" required>
           <option value="">Select category</option>
           <?php foreach ($categories as $category): ?>
@@ -99,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <div class="form-group">
-        <label>Skill Level *</label>
+        <label>Skill Level </label>
         <select name="level" required>
           <option value="beginner">Beginner</option>
           <option value="intermediate">Intermediate</option>
@@ -109,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <div class="form-group">
-        <label>Description *</label>
+        <label>Description </label>
         <textarea name="description" rows="4" required></textarea>
       </div>
 
@@ -128,8 +131,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <div class="form-actions">
-        <a href="profile.php" class="btn btn-danger">Cancel</a>
-        <button type="submit" class="btn btn-success">Add Skill</button>
+        <a href="profile.php" class="btn btn-cancel">
+          <i class="fas fa-times"></i> Cancel
+        </a>
+        <button type="submit" class="btn btn-primary-blue">
+          <i class="fas fa-plus"></i> Add Skill
+        </button>
       </div>
 
     </form>

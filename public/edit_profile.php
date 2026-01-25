@@ -39,12 +39,12 @@
     <div class="form-container">
       <form id="profileForm">
         <div class="form-group">
-          <label for="name">Full name *</label>
+          <label for="name">Full name </label>
           <input type="text" id="name" name="name" value="Anid Bojaj" required>
         </div>
 
         <div class="form-group">
-          <label for="email">Email Address *</label>
+          <label for="email">Email Address </label>
           <input type="email" id="email" name="email" value="anidbojaj@gmail.com" required>
         </div>
 
@@ -100,8 +100,8 @@
         </div>
 
          <div class="form-actions">
-          <a href="profile.php" class="btn btn-danger">Cancel</a>
-          <button type="submit" class="btn btn-success">Update Profile</button>
+          <a href="profile.php" class="btn btn-secondary">Cancel</a>
+          <button type="submit" class="btn btn-primary">Update Profile</button>
         </div>
       </form>
     </div>

@@ -65,4 +65,19 @@ class User extends BaseModel
             "SELECT * FROM users WHERE full_name IN ('Anid', 'Blert', 'Anid Bojaj', 'Blert') OR full_name LIKE '%Anid%' OR full_name LIKE '%Blert%' LIMIT 2"
         );
     }
+
+    public function findAll(): array
+    {
+        return $this->fetchAll(
+            "SELECT id, full_name, email, location, created_at FROM users ORDER BY created_at DESC"
+        );
+    }
+
+    public function delete(int $id): bool
+    {
+        return $this->execute(
+            "DELETE FROM users WHERE id = :id",
+            ['id' => $id]
+        );
+    }
 }
