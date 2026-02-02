@@ -1,0 +1,182 @@
+.public-profile-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.public-profile-content {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.profile-card {
+  flex: 0 0 300px;
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.profile-info {
+  text-align: center;
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #333;
+}
+
+.profile-detail {
+  margin: 15px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.profile-detail label {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.profile-detail p {
+  margin: 0;
+  word-break: break-word;
+}
+
+.user-skills-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.skills-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.skills-flexbox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.skills-flexbox > * {
+  flex: 1 1 280px;
+  min-width: 280px;
+}
+
+.skill-card-public {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-card-public:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.skill-card-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  background: #f0f0f0;
+}
+
+.skill-card-body {
+  padding: 20px;
+}
+
+.skill-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #333;
+}
+
+.skill-description {
+  color: #666;
+  font-size: 14px;
+  margin: 10px 0;
+  line-height: 1.4;
+}
+
+.skill-meta {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.badge-level {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.badge-method {
+  background-color: #3498db;
+  color: white;
+}
+
+.no-skills {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 10px;
+  color: #666;
+}
+
+.no-skills-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.back-button {
+  margin-bottom: 30px;
+}
+
+.back-button a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.back-button a:hover {
+  color: #764ba2;
+}
